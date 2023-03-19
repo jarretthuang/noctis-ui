@@ -1,0 +1,7 @@
+:host {
+  @layer components {
+    .nav-bar-item {
+      @apply max-h-full p-3 md:p-2;
+    }
+  }
+}
