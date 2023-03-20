@@ -3,7 +3,6 @@ import { Component, Element, Prop, State, h } from "@stencil/core";
 @Component({
   tag: "nav-bar",
   styleUrl: "nav-bar.css",
-  shadow: true,
 })
 export class NavBar {
   /**
@@ -34,6 +33,7 @@ export class NavBar {
 
   componentWillLoad() {
     this._renderChildContent();
+    this.host.innerHTML = "";
     window.onresize = () => {
       this.isExpanded = false;
     };

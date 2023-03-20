@@ -1,6 +1,7 @@
 :host {
   @layer components {
     .nav-bar {
+      z-index: 999;
       @apply absolute top-0 left-0 flex flex-col items-center;
       @apply h-14 w-screen shadow-md;
       @apply bg-slate-100/90 font-sans text-slate-800 duration-500;
