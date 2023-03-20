@@ -15,10 +15,16 @@ export namespace Components {
           * URL of the logo image
          */
         "logo_url": string;
+    }
+    interface NavBarItem {
         /**
-          * Navigation items
+          * Name of the nav bar item
          */
-        "nav_items": string[];
+        "name": string;
+        /**
+          * Redirect target of the nav bar item
+         */
+        "target": string;
     }
 }
 declare global {
@@ -28,8 +34,15 @@ declare global {
         prototype: HTMLNavBarElement;
         new (): HTMLNavBarElement;
     };
+    interface HTMLNavBarItemElement extends Components.NavBarItem, HTMLStencilElement {
+    }
+    var HTMLNavBarItemElement: {
+        prototype: HTMLNavBarItemElement;
+        new (): HTMLNavBarItemElement;
+    };
     interface HTMLElementTagNameMap {
         "nav-bar": HTMLNavBarElement;
+        "nav-bar-item": HTMLNavBarItemElement;
     }
 }
 declare namespace LocalJSX {
@@ -42,13 +55,20 @@ declare namespace LocalJSX {
           * URL of the logo image
          */
         "logo_url"?: string;
+    }
+    interface NavBarItem {
         /**
-          * Navigation items
+          * Name of the nav bar item
          */
-        "nav_items"?: string[];
+        "name"?: string;
+        /**
+          * Redirect target of the nav bar item
+         */
+        "target"?: string;
     }
     interface IntrinsicElements {
         "nav-bar": NavBar;
+        "nav-bar-item": NavBarItem;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +76,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "nav-bar": LocalJSX.NavBar & JSXBase.HTMLAttributes<HTMLNavBarElement>;
+            "nav-bar-item": LocalJSX.NavBarItem & JSXBase.HTMLAttributes<HTMLNavBarItemElement>;
         }
     }
 }

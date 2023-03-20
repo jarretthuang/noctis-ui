@@ -1,7 +1,32 @@
 :host {
   @layer components {
-    .nav-bar-item {
-      @apply max-h-full p-3 md:p-2;
+    .nav-bar {
+      @apply absolute top-0 left-0 flex flex-col items-center;
+      @apply h-14 w-screen shadow-md;
+      @apply bg-slate-100/50 font-sans text-slate-800 backdrop-blur-sm duration-500;
+      @apply select-none;
+      @apply md:h-12 md:px-8;
+    }
+
+    .nav-bar img {
+      @apply pointer-events-none;
+    }
+
+    .curtain {
+      @apply h-5 w-full bg-slate-100/50 shadow-md;
+    }
+
+    .nav-bar.expanded {
+      @apply shadow-none;
+    }
+
+    .nav-bar.expanded .curtain {
+      @apply absolute top-14 left-0 flex w-screen transition-all duration-1000;
+      height: calc(100vh - 3.5rem);
+    }
+
+    .svg-path {
+      @apply fill-slate-900/60 group-hover:fill-slate-900/90;
     }
   }
 }
