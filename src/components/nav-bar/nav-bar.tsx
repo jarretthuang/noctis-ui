@@ -34,6 +34,9 @@ export class NavBar {
 
   componentWillLoad() {
     this._renderChildContent();
+    window.onresize = () => {
+      this.isExpanded = false;
+    };
   }
 
   private _renderChildContent = () => {
@@ -82,19 +85,21 @@ export class NavBar {
   };
 
   render() {
-    const imageSrc = this.logo_url;
+    const { logo_url, logo_name, childrenHTML } = this;
     return (
       <nav class={"nav-bar " + this._expandedCssClass()}>
         <div class="flex h-full w-full max-w-5xl items-center justify-between">
-          <img class="max-h-full object-contain p-3 md:p-2" src={imageSrc} />
-          <ul class="hidden h-full md:flex" innerHTML={this.childrenHTML}></ul>
+          <img
+            class="max-h-full object-contain p-3 md:p-2"
+            src={logo_url}
+            alt={logo_name}
+          />
+          <div class="curtain"></div>
+          <ul
+            class="invisible flex h-full w-0 md:visible md:w-auto"
+            innerHTML={childrenHTML}
+          ></ul>
           {this._renderMenuToggle()}
-          <div class="curtain hidden">
-            <ul
-              class="flex h-full md:hidden"
-              innerHTML={this.childrenHTML}
-            ></ul>
-          </div>
         </div>
       </nav>
     );

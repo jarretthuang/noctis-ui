@@ -3,8 +3,9 @@
     .nav-bar {
       @apply absolute top-0 left-0 flex flex-col items-center;
       @apply h-14 w-screen shadow-md;
-      @apply bg-slate-100/50 font-sans text-slate-800 backdrop-blur-sm duration-500;
+      @apply bg-slate-100/90 font-sans text-slate-800 duration-500;
       @apply select-none;
+      @apply backdrop-blur-sm;
       @apply md:h-12 md:px-8;
     }
 
@@ -12,8 +13,15 @@
       @apply pointer-events-none;
     }
 
-    .curtain {
-      @apply h-5 w-full bg-slate-100/50 shadow-md;
+    .nav-bar .curtain {
+      @apply absolute bottom-0 left-0 top-14 h-0 w-screen overflow-hidden;
+      @apply transition-[height] duration-500;
+      @apply backdrop-blur-sm;
+      @apply bg-slate-100/90 shadow-md;
+    }
+
+    .nav-bar ul li {
+      @apply transition-transform;
     }
 
     .nav-bar.expanded {
@@ -21,8 +29,18 @@
     }
 
     .nav-bar.expanded .curtain {
-      @apply absolute top-14 left-0 flex w-screen transition-all duration-1000;
+      @apply flex;
       height: calc(100vh - 3.5rem);
+    }
+
+    .nav-bar.expanded ul {
+      @apply visible absolute top-14 left-0 w-screen flex-col;
+      @apply transition-all duration-300 ease-linear;
+      height: calc(100vh - 3.5rem);
+    }
+
+    .nav-bar.expanded nav-bar-item {
+      @apply h-14;
     }
 
     .svg-path {
