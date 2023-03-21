@@ -40,7 +40,7 @@
       height: calc(100vh - 3.5rem);
     }
 
-    .nav-bar.expanded nav-bar-item {
+    .nav-bar.expanded ul li {
       @apply h-14;
     }
 

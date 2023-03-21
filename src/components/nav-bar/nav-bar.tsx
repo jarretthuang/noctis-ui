@@ -1,8 +1,33 @@
-import { Component, Element, Prop, State, h } from "@stencil/core";
+import {
+  Component,
+  Element,
+  FunctionalComponent,
+  Prop,
+  State,
+  h,
+} from "@stencil/core";
+
+const NavBarItem: FunctionalComponent<{ target: string; name: string }> = ({
+  target,
+  name,
+}) => {
+  return (
+    <li class="flex h-full w-full cursor-pointer text-lg uppercase hover:bg-slate-500/80 hover:text-slate-50">
+      <a
+        class="flex h-full w-full select-none items-center px-8"
+        href={target}
+        rel="noopener noreferrer"
+      >
+        <div>{name}</div>
+      </a>
+    </li>
+  );
+};
 
 @Component({
   tag: "nav-bar",
   styleUrl: "nav-bar.css",
+  shadow: true,
 })
 export class NavBar {
   /**
@@ -22,9 +47,9 @@ export class NavBar {
   @Element() host: HTMLElement;
 
   /**
-   * String that represents the HTML content of the children elements
+   * Array that represents the nav bar items
    */
-  @State() childrenHTML: string;
+  @State() items: Element[];
 
   /**
    * True if nav bar is expanded
@@ -32,18 +57,24 @@ export class NavBar {
   @State() isExpanded: boolean;
 
   componentWillLoad() {
-    this._renderChildContent();
-    this.host.innerHTML = "";
+    this.items = Array.from(this.host.children).filter(
+      (child) => child.tagName.toLowerCase() === "nav-bar-item"
+    );
+    //this.host.innerHTML = "";
     window.onresize = () => {
       this.isExpanded = false;
     };
   }
 
-  private _renderChildContent = () => {
-    this.childrenHTML = Array.from(this.host.children)
-      .filter((child) => child.tagName.toLowerCase() === "nav-bar-item")
-      .map((child) => child.outerHTML)
-      .join("");
+  private _renderItems = () => {
+    const items = this.items.map((child: Element) => {
+      const name = child.getAttribute("name");
+      const target = child.getAttribute("target");
+      return <NavBarItem target={target} name={name} />;
+    });
+    return (
+      <ul class="invisible flex h-full w-0 md:visible md:w-auto">{items}</ul>
+    );
   };
 
   private _expandedCssClass = () => {
@@ -85,7 +116,7 @@ export class NavBar {
   };
 
   render() {
-    const { logo_url, logo_name, childrenHTML } = this;
+    const { logo_url, logo_name } = this;
     return (
       <nav class={"nav-bar " + this._expandedCssClass()}>
         <div class="flex h-full w-full max-w-5xl items-center justify-between">
@@ -95,10 +126,7 @@ export class NavBar {
             alt={logo_name}
           />
           <div class="curtain"></div>
-          <ul
-            class="invisible flex h-full w-0 md:visible md:w-auto"
-            innerHTML={childrenHTML}
-          ></ul>
+          {this._renderItems()}
           {this._renderMenuToggle()}
         </div>
       </nav>
