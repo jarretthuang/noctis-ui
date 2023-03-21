@@ -1,28 +1,5 @@
-import {
-  Component,
-  Element,
-  FunctionalComponent,
-  Prop,
-  State,
-  h,
-} from "@stencil/core";
-
-const NavBarItem: FunctionalComponent<{ target: string; name: string }> = ({
-  target,
-  name,
-}) => {
-  return (
-    <li class="flex h-full w-full cursor-pointer text-lg uppercase hover:bg-slate-500/80 hover:text-slate-50">
-      <a
-        class="flex h-full w-full select-none items-center px-8"
-        href={target}
-        rel="noopener noreferrer"
-      >
-        <div>{name}</div>
-      </a>
-    </li>
-  );
-};
+import { Component, Element, Prop, State, h } from "@stencil/core";
+import { NavBarItem } from "./inner/NavBarItem";
 
 @Component({
   tag: "nav-bar",
@@ -60,7 +37,7 @@ export class NavBar {
     this.items = Array.from(this.host.children).filter(
       (child) => child.tagName.toLowerCase() === "nav-bar-item"
     );
-    //this.host.innerHTML = "";
+    this.host.innerHTML = "";
     window.onresize = () => {
       this.isExpanded = false;
     };
@@ -68,9 +45,9 @@ export class NavBar {
 
   private _renderItems = () => {
     const items = this.items.map((child: Element) => {
-      const name = child.getAttribute("name");
-      const target = child.getAttribute("target");
-      return <NavBarItem target={target} name={name} />;
+      const name = child.textContent;
+      const to = child.getAttribute("to");
+      return <NavBarItem to={to} name={name} />;
     });
     return (
       <ul class="invisible flex h-full w-0 md:visible md:w-auto">{items}</ul>
