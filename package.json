@@ -28,10 +28,13 @@
   },
   "keywords": [
     "javascript",
+    "typescript",
     "ui",
     "react",
     "css",
-    "tailwind"
+    "tailwind",
+    "html",
+    "web component"
   ],
   "author": "Jarrett Huang <jarrett.huang@jhuang.ca>",
   "license": "MIT",

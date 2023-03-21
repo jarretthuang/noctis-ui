@@ -1,2 +1,3 @@
 # noctis-ui
- A UI component library based on Tailwind CSS
+
+A framework-independent UI component library based on Tailwind CSS
