@@ -5,7 +5,7 @@ export const NavBarItem: FunctionalComponent<{
   name: string;
 }> = ({ to, name }) => {
   return (
-    <li class="flex h-full w-full cursor-pointer text-lg uppercase hover:bg-slate-500/80 hover:text-slate-50">
+    <li class="nav-bar-item flex h-full w-full cursor-pointer text-lg uppercase">
       <a
         class="flex h-full w-full select-none items-center px-8"
         href={to}

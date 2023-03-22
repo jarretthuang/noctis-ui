@@ -1,13 +1,35 @@
 :host {
   @layer components {
+    .background-color {
+      @apply bg-slate-100/90 dark:bg-slate-900/70;
+    }
+
+    .text-color {
+      @apply text-slate-800 dark:text-slate-100/90;
+    }
+
+    .fill-color {
+      @apply fill-slate-800 dark:fill-slate-100/90;
+      @apply group-hover:fill-slate-900/90 dark:group-hover:fill-slate-100/95;
+    }
+
+    .reverse-color-on-hover {
+      @apply hover:bg-slate-500/80 hover:text-slate-50 dark:hover:bg-slate-100/80 dark:hover:text-slate-900/80;
+    }
+
     .nav-bar {
       z-index: 999;
       @apply absolute top-0 left-0 flex flex-col items-center;
       @apply h-14 w-screen shadow-md;
-      @apply bg-slate-100/90 font-sans text-slate-800 duration-500;
+      @apply font-sans duration-500;
       @apply select-none;
       @apply backdrop-blur-sm;
       @apply md:h-12 md:px-8;
+      @apply background-color text-color;
+    }
+
+    .nav-bar .nav-bar-item {
+      @apply reverse-color-on-hover;
     }
 
     .nav-bar img {
@@ -18,7 +40,8 @@
       @apply absolute bottom-0 left-0 top-14 h-0 w-screen overflow-hidden;
       @apply transition-[height] duration-500;
       @apply backdrop-blur-sm;
-      @apply bg-slate-100/90 shadow-md;
+      @apply shadow-md;
+      @apply background-color text-color;
     }
 
     .nav-bar ul li {
@@ -45,7 +68,7 @@
     }
 
     .svg-path {
-      @apply fill-slate-900/60 group-hover:fill-slate-900/90;
+      @apply fill-color;
     }
   }
 }
