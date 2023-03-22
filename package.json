@@ -1,6 +1,6 @@
 {
   "name": "noctis-ui",
-  "version": "1.0.4.beta.1",
+  "version": "1.0.5-alpha.0",
   "description": "A framework-independent UI component library based on Tailwind CSS.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
