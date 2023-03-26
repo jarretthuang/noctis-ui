@@ -6,7 +6,13 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface NavBar {
+    interface NuiModal {
+        /**
+          * Header of the modal
+         */
+        "header": string;
+    }
+    interface NuiNavBar {
         /**
           * Name of the logo Used as a default placeholder if logo image is not available
          */
@@ -16,20 +22,50 @@ export namespace Components {
          */
         "logo_url": string;
     }
+    interface NuiNavBarItem {
+        /**
+          * Name of the nav bar item
+         */
+        "name": string;
+        /**
+          * Link to the redirected location
+         */
+        "to": string;
+    }
 }
 declare global {
-    interface HTMLNavBarElement extends Components.NavBar, HTMLStencilElement {
+    interface HTMLNuiModalElement extends Components.NuiModal, HTMLStencilElement {
     }
-    var HTMLNavBarElement: {
-        prototype: HTMLNavBarElement;
-        new (): HTMLNavBarElement;
+    var HTMLNuiModalElement: {
+        prototype: HTMLNuiModalElement;
+        new (): HTMLNuiModalElement;
+    };
+    interface HTMLNuiNavBarElement extends Components.NuiNavBar, HTMLStencilElement {
+    }
+    var HTMLNuiNavBarElement: {
+        prototype: HTMLNuiNavBarElement;
+        new (): HTMLNuiNavBarElement;
+    };
+    interface HTMLNuiNavBarItemElement extends Components.NuiNavBarItem, HTMLStencilElement {
+    }
+    var HTMLNuiNavBarItemElement: {
+        prototype: HTMLNuiNavBarItemElement;
+        new (): HTMLNuiNavBarItemElement;
     };
     interface HTMLElementTagNameMap {
-        "nav-bar": HTMLNavBarElement;
+        "nui-modal": HTMLNuiModalElement;
+        "nui-nav-bar": HTMLNuiNavBarElement;
+        "nui-nav-bar-item": HTMLNuiNavBarItemElement;
     }
 }
 declare namespace LocalJSX {
-    interface NavBar {
+    interface NuiModal {
+        /**
+          * Header of the modal
+         */
+        "header"?: string;
+    }
+    interface NuiNavBar {
         /**
           * Name of the logo Used as a default placeholder if logo image is not available
          */
@@ -39,15 +75,29 @@ declare namespace LocalJSX {
          */
         "logo_url"?: string;
     }
+    interface NuiNavBarItem {
+        /**
+          * Name of the nav bar item
+         */
+        "name"?: string;
+        /**
+          * Link to the redirected location
+         */
+        "to"?: string;
+    }
     interface IntrinsicElements {
-        "nav-bar": NavBar;
+        "nui-modal": NuiModal;
+        "nui-nav-bar": NuiNavBar;
+        "nui-nav-bar-item": NuiNavBarItem;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "nav-bar": LocalJSX.NavBar & JSXBase.HTMLAttributes<HTMLNavBarElement>;
+            "nui-modal": LocalJSX.NuiModal & JSXBase.HTMLAttributes<HTMLNuiModalElement>;
+            "nui-nav-bar": LocalJSX.NuiNavBar & JSXBase.HTMLAttributes<HTMLNuiNavBarElement>;
+            "nui-nav-bar-item": LocalJSX.NuiNavBarItem & JSXBase.HTMLAttributes<HTMLNuiNavBarItemElement>;
         }
     }
 }

@@ -1,5 +1,6 @@
 :host {
   @layer components {
+    /* Colors */
     .background-color {
       @apply bg-slate-100/90 dark:bg-slate-900/70;
     }
@@ -28,8 +29,16 @@
       @apply background-color text-color;
     }
 
+    .nav-bar .content-container {
+      @apply flex h-full w-full max-w-5xl items-center justify-between;
+    }
+
     .nav-bar .nav-bar-item {
       @apply reverse-color-on-hover;
+    }
+
+    .nav-bar .logo-image {
+      @apply max-h-full object-contain p-3 md:p-2;
     }
 
     .nav-bar img {
@@ -67,8 +76,8 @@
       @apply h-14;
     }
 
-    .svg-path {
-      @apply fill-color;
+    .item-list {
+      @apply invisible flex h-full w-0 md:visible md:w-auto;
     }
   }
 }

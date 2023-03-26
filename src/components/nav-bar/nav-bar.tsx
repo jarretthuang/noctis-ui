@@ -1,10 +1,11 @@
 import { Component, Element, Prop, State, h } from "@stencil/core";
-import { NavBarItem } from "./inner/NavBarItem";
+import { MenuSVG } from "../utils/MenuSVG";
+import { CloseSVG } from "../utils/CloseSVG";
 
 @Component({
-  tag: "nav-bar",
+  tag: "nui-nav-bar",
   styleUrl: "nav-bar.css",
-  shadow: true,
+  shadow: false,
 })
 export class NavBar {
   /**
@@ -35,7 +36,7 @@ export class NavBar {
 
   componentWillLoad() {
     this.items = Array.from(this.host.children).filter(
-      (child) => child.tagName.toLowerCase() === "nav-bar-item"
+      (child) => child.tagName.toLowerCase() === "nui-nav-bar-item"
     );
     this.host.innerHTML = "";
     window.onresize = () => {
@@ -47,11 +48,9 @@ export class NavBar {
     const items = this.items.map((child: Element) => {
       const name = child.textContent;
       const to = child.getAttribute("to");
-      return <NavBarItem to={to} name={name} />;
+      return <nui-nav-bar-item to={to} name={name} />;
     });
-    return (
-      <ul class="invisible flex h-full w-0 md:visible md:w-auto">{items}</ul>
-    );
+    return <ul class="item-list">{items}</ul>;
   };
 
   private _expandedCssClass = () => {
@@ -61,33 +60,19 @@ export class NavBar {
   private _renderMenuToggle = () => {
     if (this.isExpanded) {
       return (
-        <svg
-          class="close-menu group w-14 cursor-pointer p-3 md:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
+        <CloseSVG
           onClick={() => (this.isExpanded = false)}
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            class="svg-path"
-            d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"
-          />
-        </svg>
+          cssClass="w-14 p-3 md:hidden"
+          fillCssClass="fill-color"
+        />
       );
     } else {
       return (
-        <svg
-          class="open-menu group w-14 cursor-pointer p-3.5 md:hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
+        <MenuSVG
           onClick={() => (this.isExpanded = true)}
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            class="svg-path"
-            d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"
-          />
-        </svg>
+          cssClass="w-14 p-3.5 md:hidden"
+          fillCssClass="fill-color"
+        />
       );
     }
   };
@@ -96,12 +81,8 @@ export class NavBar {
     const { logo_url, logo_name } = this;
     return (
       <nav class={"nav-bar " + this._expandedCssClass()}>
-        <div class="flex h-full w-full max-w-5xl items-center justify-between">
-          <img
-            class="max-h-full object-contain p-3 md:p-2"
-            src={logo_url}
-            alt={logo_name}
-          />
+        <div class="content-container">
+          <img class="logo-image" src={logo_url} alt={logo_name} />
           <div class="curtain"></div>
           {this._renderItems()}
           {this._renderMenuToggle()}

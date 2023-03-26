@@ -1,0 +1,11 @@
+:host {
+  @layer components {
+    .nav-bar-item {
+      @apply flex h-full w-full cursor-pointer text-lg uppercase;
+    }
+
+    .nav-bar-item a {
+      @apply flex h-full w-full select-none items-center px-8;
+    }
+  }
+}
